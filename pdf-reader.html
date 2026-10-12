@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Library Reader</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef2ff;color:#172554}
+header{padding:16px 22px;background:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 2px 12px #0001}
+header h2{margin:0;font-size:20px}
+a,.btn{border:0;background:#6d28d9;color:white;padding:10px 15px;border-radius:9px;text-decoration:none;cursor:pointer}
+main{text-align:center;padding:24px 12px}
+#status{margin:12px}
+#book{margin:20px auto;max-width:100%;display:flex;justify-content:center}
+.page{background:white;overflow:hidden;box-shadow:0 4px 14px #0002}
+.page canvas{display:block;width:100%;height:100%;object-fit:contain}
+.controls{display:flex;justify-content:center;gap:12px;align-items:center;flex-wrap:wrap}
+#pageInfo{font-weight:bold}
+@media(max-width:600px){header h2{font-size:16px}main{padding:15px 5px}}
+</style>
+</head>
+<body>
+<header>
+<h2>📚 Data Science Digital Library</h2>
+<a href="dashboard.html">← Back to Dashboard</a>
+</header>
+<main>
+<h2 id="bookTitle">Study Material</h2>
+<p>Turn the pages to read your PDF like a book.</p>
+<div id="status">Loading PDF...</div>
+<div id="book"></div>
+<div class="controls">
+<button class="btn" id="prev">← Previous</button>
+<span id="pageInfo">Page - / -</span>
+<button class="btn" id="next">Next →</button>
+</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const params = new URLSearchParams(location.search);
+const file = params.get("file");
+const title = params.get("title") || "Study Material";
+document.getElementById("bookTitle").textContent = title;
+
+let book = null;
+
+async function loadBook() {
+    if (!file) {
+        document.getElementById("status").textContent =
+            "PDF not selected. Return to the dashboard and choose a module.";
+        return;
+    }
+
+    try {
+        const pdf = await pdfjsLib.getDocument(file).promise;
+        const bookElement = document.getElementById("book");
+        const pages = [];
+
+        for (let n = 1; n <= pdf.numPages; n++) {
+            const pdfPage = await pdf.getPage(n);
+            const viewport = pdfPage.getViewport({scale: 1.15});
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            await pdfPage.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise;
+
+            const page = document.createElement("div");
+            page.className = "page";
+            page.appendChild(canvas);
+            bookElement.appendChild(page);
+            pages.push(page);
+        }
+
+        book = new St.PageFlip(bookElement, {
+            width: 420,
+            height: 590,
+            size: "stretch",
+            minWidth: 280,
+            maxWidth: 840,
+            minHeight: 380,
+            maxHeight: 1180,
+            showCover: true,
+            maxShadowOpacity: 0.45,
+            mobileScrollSupport: true,
+            usePortrait: true
+        });
+
+        book.loadFromHTML(pages);
+
+        document.getElementById("status").textContent =
+            "PDF loaded successfully!";
+        updatePage();
+
+        book.on("flip", updatePage);
+    } catch (error) {
+        document.getElementById("status").textContent =
+            "PDF load avvaledu. File name, pdfs folder, internet connection check cheyyi.";
+        console.error(error);
+    }
+}
+
+function updatePage() {
+    if (book) {
+        document.getElementById("pageInfo").textContent =
+            "Page " + (book.getCurrentPageIndex() + 1) +
+            " / " + book.getPageCount();
+    }
+}
+
+document.getElementById("prev").addEventListener("click", function() {
+    if (book) book.flipPrev();
+});
+
+document.getElementById("next").addEventListener("click", function() {
+    if (book) book.flipNext();
+});
+
+loadBook();
+</script>
+</body>
+</html>

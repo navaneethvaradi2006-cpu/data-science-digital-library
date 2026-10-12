@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Science Coding Lab</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#101827;color:#f1f5f9}
+header{padding:20px;background:#17243a;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header h2{margin:0;color:#60a5fa}
+button,select{padding:10px 16px;border:0;border-radius:7px;cursor:pointer;font-weight:bold}
+.back-btn{background:#334155;color:white}
+.run-btn{background:#16a34a;color:white}
+button:disabled{opacity:.6;cursor:wait}
+.container{max-width:1100px;margin:25px auto;padding:15px}
+.toolbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+#editor{width:100%;min-height:350px;padding:20px;background:#080e19;color:#d1fae5;border:1px solid #334155;border-radius:10px;font-family:Consolas,monospace;font-size:15px;line-height:1.6;resize:vertical;tab-size:4}
+.output-box{margin-top:20px;padding:18px;min-height:130px;background:#080e19;border:1px solid #334155;border-radius:10px;overflow:hidden}
+.output-box h3{margin-top:0;color:#60a5fa}
+#output{white-space:pre-wrap;overflow-wrap:anywhere;font-family:Consolas,monospace}
+#plotOutput{display:none;max-width:100%;height:auto;margin-top:16px;background:white;border-radius:8px}
+.note{color:#cbd5e1;font-size:14px;line-height:1.6}
+.status{color:#fbbf24;font-size:14px}
+@media(max-width:600px){header h2{font-size:19px}.container{margin:12px auto;padding:12px}#editor{min-height:300px;padding:14px;font-size:13px}}
+</style>
+</head>
+
+<body>
+<header>
+<h2>💻 Data Science Coding Lab</h2>
+<button class="back-btn" onclick="location.href='dashboard.html'">← Dashboard</button>
+</header>
+
+<div class="container">
+<h1 id="toolTitle">Python Editor</h1>
+<p class="note">Write your code, click Run Code, and check the output below.</p>
+
+<div class="toolbar">
+<select id="language" onchange="changeLanguage()">
+<option value="python">Python</option>
+<option value="numpy">NumPy</option>
+<option value="pandas">Pandas</option>
+<option value="matplotlib">Matplotlib</option>
+<option value="seaborn">Seaborn</option>
+<option value="sklearn">Scikit-Learn</option>
+</select>
+<div>
+<button class="back-btn" onclick="resetCode()">Reset</button>
+<button id="runButton" class="run-btn" onclick="runCode()">▶ Run Code</button>
+</div>
+</div>
+
+<textarea id="editor" spellcheck="false"></textarea>
+<p id="status" class="status">Loading Python runtime...</p>
+
+<div class="output-box">
+<h3>Output Console</h3>
+<pre id="output">Your output will appear here...</pre>
+<img id="plotOutput" alt="Generated chart">
+</div>
+
+<p class="note">Python runs in your browser using Pyodide. Internet is required to load the runtime and install some libraries.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+
+<script>
+let pyodide=null;
+let initialCode="";
+let seabornInstalled=false;
+
+const examples={
+python:`print("Welcome to Python!")
+a = 10
+b = 20
+print("Sum:", a + b)`,
+
+numpy:`import numpy as np
+
+numbers = np.array([10, 20, 30, 40])
+print("Array:", numbers)
+print("Mean:", np.mean(numbers))
+print("Maximum:", np.max(numbers))`,
+
+pandas:`import pandas as pd
+
+data = {
+    "Name": ["Ravi", "Priya", "Arjun"],
+    "Marks": [85, 92, 78]
+}
+df = pd.DataFrame(data)
+print(df)
+print("Average marks:", df["Marks"].mean())`,
+
+matplotlib:`import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5]
+y = [10, 20, 15, 30, 25]
+
+plt.plot(x, y, marker="o")
+plt.title("Sample Data Graph")
+plt.xlabel("X Values")
+plt.ylabel("Y Values")
+plt.grid(True)
+print("Graph created.")`,
+
+seaborn:`import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.DataFrame({
+    "sepal_length": [5.1, 4.9, 6.2, 5.9, 6.7, 5.5],
+    "petal_length": [1.4, 1.4, 4.5, 4.2, 5.6, 3.8],
+    "species": ["setosa", "setosa", "versicolor",
+                "versicolor", "virginica", "virginica"]
+})
+
+sns.scatterplot(data=data, x="sepal_length",
+                y="petal_length", hue="species")
+plt.title("Seaborn Scatter Plot")
+plt.tight_layout()
+print(data.to_string(index=False))`,
+
+sklearn:`from sklearn.linear_model import LinearRegression
+
+X = [[1], [2], [3], [4], [5]]
+y = [10, 20, 30, 40, 50]
+
+model = LinearRegression()
+model.fit(X, y)
+
+print("Prediction for 6:", model.predict([[6]])[0])`
+};
+
+const titles={
+python:"Python Editor",
+numpy:"NumPy Lab",
+pandas:"Pandas Data Analysis Lab",
+matplotlib:"Matplotlib Visualization Lab",
+seaborn:"Seaborn Visualization Lab",
+sklearn:"Machine Learning Lab"
+};
+
+function clearPlot(){
+const plot=document.getElementById("plotOutput");
+plot.removeAttribute("src");
+plot.style.display="none";
+}
+
+function changeLanguage(){
+const lang=document.getElementById("language").value;
+document.getElementById("toolTitle").textContent=titles[lang];
+document.getElementById("editor").value=examples[lang];
+initialCode=examples[lang];
+document.getElementById("output").textContent="Click Run Code to see output.";
+clearPlot();
+}
+
+async function loadRuntime(){
+try{
+pyodide=await loadPyodide();
+document.getElementById("status").textContent="Python runtime ready!";
+}catch(error){
+document.getElementById("status").textContent="Runtime failed. Check internet and refresh.";
+document.getElementById("output").textContent=String(error);
+}
+}
+
+async function ensurePackages(lang){
+const status=document.getElementById("status");
+
+if(lang==="python")return;
+
+if(lang==="numpy"){
+status.textContent="Loading NumPy...";
+await pyodide.loadPackage("numpy");
+}
+
+if(lang==="pandas"){
+status.textContent="Loading Pandas...";
+await pyodide.loadPackage(["numpy","pandas"]);
+}
+
+if(lang==="matplotlib"){
+status.textContent="Loading Matplotlib...";
+await pyodide.loadPackage(["numpy","matplotlib"]);
+}
+
+if(lang==="seaborn"){
+status.textContent="Loading Seaborn...";
+await pyodide.loadPackage(["numpy","pandas","matplotlib","micropip"]);
+if(!seabornInstalled){
+await pyodide.runPythonAsync(`
+import micropip
+await micropip.install("seaborn")
+`);
+seabornInstalled=true;
+}
+}
+
+if(lang==="sklearn"){
+status.textContent="Loading Scikit-Learn...";
+await pyodide.loadPackage(["numpy","scipy","scikit-learn"]);
+}
+}
+
+async function runCode(){
+const output=document.getElementById("output");
+const status=document.getElementById("status");
+const editor=document.getElementById("editor");
+const runButton=document.getElementById("runButton");
+
+if(!pyodide){
+output.textContent="Python is still loading. Wait and try again.";
+return;
+}
+
+const lang=document.getElementById("language").value;
+output.textContent="";
+clearPlot();
+status.textContent="Running code...";
+runButton.disabled=true;
+
+try{
+await ensurePackages(lang);
+
+await pyodide.runPythonAsync(`
+import sys
+from io import StringIO
+
+_old_stdout = sys.stdout
+_old_stderr = sys.stderr
+_buffer = StringIO()
+sys.stdout = _buffer
+sys.stderr = _buffer
+
+try:
+    exec(compile(${JSON.stringify(editor.value)}, "<editor>", "exec"))
+finally:
+    sys.stdout = _old_stdout
+    sys.stderr = _old_stderr
+
+_output_text = _buffer.getvalue()
+_plot_created = False
+
+if "matplotlib.pyplot" in sys.modules:
+    import matplotlib.pyplot as _plt
+    _fig = _plt.gcf()
+    if _fig.get_axes():
+        _fig.savefig("/tmp/ds_plot.png", format="png", bbox_inches="tight")
+        _plot_created = True
+    _plt.close("all")
+`);
+
+const result=pyodide.globals.get("_output_text");
+output.textContent=result||"Code executed, but no text output was printed.";
+
+if(pyodide.globals.get("_plot_created")){
+const bytes=pyodide.FS.readFile("/tmp/ds_plot.png");
+let binary="";
+for(let i=0;i<bytes.length;i++){
+binary+=String.fromCharCode(bytes[i]);
+}
+const plot=document.getElementById("plotOutput");
+plot.src="data:image/png;base64,"+btoa(binary);
+plot.style.display="block";
+}
+
+status.textContent="Execution completed!";
+}catch(error){
+output.textContent="ERROR:\n"+String(error);
+status.textContent="Execution failed. Check the error above.";
+}finally{
+runButton.disabled=false;
+}
+}
+
+function resetCode(){
+document.getElementById("editor").value=initialCode;
+document.getElementById("output").textContent="Code reset. Click Run Code.";
+clearPlot();
+}
+
+const params=new URLSearchParams(location.search);
+const requestedTool=(params.get("tool")||"python").toLowerCase();
+
+const toolMap={
+python:"python",
+numpy:"numpy",
+pandas:"pandas",
+matplotlib:"matplotlib",
+seaborn:"seaborn",
+"scikit-learn":"sklearn",
+sklearn:"sklearn"
+};
+
+document.getElementById("language").value=toolMap[requestedTool]||"python";
+changeLanguage();
+loadRuntime();
+</script>
+</body>
+</html>

@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Science Digital Library | Dashboard</title>
+
+    <link rel="stylesheet" href="script.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body class="dashboard-page">
+
+    
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+        <img src="images/mabu-logo.png" alt="MBU Logo">
+        <div>
+            <h3>DS Digital</h3>
+            <span>Library</span>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <button class="nav-item active" onclick="showSection('home', this)">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+
+        <button class="nav-item" onclick="showSection('modules', this)">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Modules</span>
+        </button>
+
+        <button class="nav-item" onclick="showSection('labs', this)">
+            <i class="fa-solid fa-flask"></i>
+            <span>Lab Assignments</span>
+        </button>
+
+        <button class="nav-item" onclick="showSection('tools', this)">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <span>Tools</span>
+        </button>
+
+        <button class="nav-item" onclick="showSection('resources', this)">
+            <i class="fa-solid fa-folder-open"></i>
+            <span>Resources</span>
+        </button>
+
+        <button class="nav-item" onclick="showSection('ai', this)">
+            <i class="fa-solid fa-robot"></i>
+            <span>AI Model</span>
+        </button>
+
+        <button class="nav-item" onclick="showSection('profile', this)">
+            <i class="fa-solid fa-user"></i>
+            <span>My Profile</span>
+        </button>
+
+    </nav>
+
+    <!-- STUDENT ID CARD -->
+    <div class="sidebar-id-card">
+
+        <div class="id-card-header">
+            <img src="images/mabu-logo.png" alt="MBU Logo">
+            <div>
+                <strong>MOHAN BABU</strong>
+                <span>UNIVERSITY</span>
+            </div>
+        </div>
+
+        <div class="id-card-label">STUDENT ID CARD</div>
+
+        <img
+            class="id-card-photo"
+            src="images/navaneeth.jpg"
+            alt="Navaneeth Profile Photo"
+        >
+
+        <h3>VARADI NAVANEETH</h3>
+        <p class="id-card-course">B.Tech - CSE (Data Science)</p>
+
+        <div class="id-card-details">
+            <div>
+                <span>Register No.</span>
+                <strong>24102A030133</strong>
+            </div>
+
+            <div>
+                <span>Year / Semester</span>
+                <strong>III Year / V Sem</strong>
+            </div>
+
+            <div>
+                <span>Section</span>
+                <strong>DS-3</strong>
+            </div>
+
+            <div>
+                <span>Academic Year</span>
+                <strong>2026-27</strong>
+            </div>
+        </div>
+
+        <div class="id-card-footer">
+            <i class="fa-solid fa-graduation-cap"></i>
+            DATA SCIENCE DEPARTMENT
+        </div>
+
+    </div>
+
+    <div class="sidebar-bottom">
+        <button class="nav-item" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+
+</aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <div class="topbar-title">
+
+                <h2>Data Science Digital Library</h2>
+
+                <p>
+                    Learn • Practice • Build • Explore
+                </p>
+
+            </div>
+
+
+            <div class="topbar-profile" onclick="showSection('profile')">
+
+                <img src="images/navaneeth.jpg" alt="Profile">
+
+                <div>
+                    <strong>Navaneeth</strong>
+                    <span>DS-3</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= HOME ================= -->
+
+        <section id="home" class="page-section active-section">
+
+            <div class="hero-section">
+
+                <div class="hero-text">
+
+                    <span class="welcome-tag">
+                        👋 Welcome Back, Navaneeth!
+                    </span>
+
+                    <h1>
+                        Explore the World of
+                        <span>Data Science</span>
+                    </h1>
+
+                    <p>
+                        Your personal digital library for learning
+                        Data Science, Python, Statistics,
+                        Machine Learning and Data Analytics.
+                    </p>
+
+                    <button
+                        class="primary-btn"
+                        onclick="showSection('modules')"
+                    >
+                        Explore Modules
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="floating-card card-one">
+                        🐍
+                        <span>Python</span>
+                    </div>
+
+                    <div class="floating-card card-two">
+                        📊
+                        <span>Analytics</span>
+                    </div>
+
+                    <div class="floating-card card-three">
+                        🤖
+                        <span>ML & AI</span>
+                    </div>
+
+                    <div class="data-circle">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK STATS -->
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Learning Overview</h2>
+                    <p>Your Data Science learning journey</p>
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                    <div>
+                        <h3>5</h3>
+                        <p>Modules</p>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+
+                    <div>
+                        <h3>10+</h3>
+                        <p>Lab Projects</p>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+
+                    <div>
+                        <h3>15+</h3>
+                        <p>Tools & Libraries</p>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+
+                    <div>
+                        <h3>AI</h3>
+                        <p>Learning Assistant</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MODULE PREVIEW -->
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Data Science Modules</h2>
+                    <p>Five modules to build your knowledge</p>
+                </div>
+
+                <button
+                    class="view-btn"
+                    onclick="showSection('modules')"
+                >
+                    View All
+                </button>
+
+            </div>
+
+
+            
+<div class="module-grid">
+
+    <div class="module-card module-purple">
+        <div class="module-number">01</div>
+        <i class="fa-brands fa-python module-icon"></i>
+        <h3>Introduction to Data Science & Python</h3>
+        <p>Learn Data Science fundamentals, Python programming and basic concepts.</p>
+        <a class="module-btn" href="pdf-reader.html?file=pdfs/module1.pdf&title=Introduction%20to%20Data%20Science%20and%20Python">Start Learning →</a>
+    </div>
+
+    <div class="module-card module-blue">
+        <div class="module-number">02</div>
+        <i class="fa-solid fa-database module-icon"></i>
+        <h3>Data Collection & Preprocessing</h3>
+        <p>Understand data collection, cleaning and preprocessing techniques.</p>
+        <a class="module-btn" href="pdf-reader.html?file=pdfs/module2.pdf&title=Data%20Collection%20and%20Preprocessing">Start Learning →</a>
+    </div>
+
+    <div class="module-card module-green">
+        <div class="module-number">03</div>
+        <i class="fa-solid fa-chart-column module-icon"></i>
+        <h3>EDA & Visualization</h3>
+        <p>Explore datasets and create meaningful visualizations using Python.</p>
+        <a class="module-btn" href="pdf-reader.html?file=pdfs/module3.pdf&title=EDA%20and%20Visualization">Start Learning →</a>
+    </div>
+
+</div>
+
+
+        </section>
+
+
+        <!-- ================= MODULES ================= -->
+
+        <section id="modules" class="page-section">
+
+            <div class="page-title">
+
+                <span>📚 Learning Path</span>
+
+                <h1>Data Science Modules</h1>
+
+                <p>
+                    Complete five modules and build your Data Science skills.
+                </p>
+
+            </div>
+
+
+            <div class="all-module-grid">
+
+                <div class="big-module-card purple-card">
+
+                    <span>MODULE 01</span>
+
+                    <i class="fa-brands fa-python"></i>
+
+                    <h2>
+                        Introduction to Data Science & Python
+                    </h2>
+
+                    <p>
+                        Data Science fundamentals, Python basics,
+                        variables, data types, loops, functions,
+                        lists and libraries.
+                    </p>
+
+                    <div class="topic-tags">
+                        <span>Python</span>
+                        <span>Data Science</span>
+                        <span>NumPy</span>
+                    </div>
+
+                    <a class="module-btn"
+   href="pdf-reader.html?file=pdfs/module1.pdf&title=Introduction%20to%20Data%20Science%20and%20Python">
+    Open Module →
+</a>
+
+                </div>
+
+
+                <div class="big-module-card blue-card">
+
+                    <span>MODULE 02</span>
+
+                    <i class="fa-solid fa-database"></i>
+
+                    <h2>
+                        Data Collection & Data Preprocessing
+                    </h2>
+
+                    <p>
+                        Data sources, data collection,
+                        missing values, duplicate data,
+                        transformation and cleaning.
+                    </p>
+
+                    <div class="topic-tags">
+                        <span>Data Collection</span>
+                        <span>Pandas</span>
+                        <span>Cleaning</span>
+                    </div>
+
+                    <a class="module-btn"
+   href="pdf-reader.html?file=pdfs/module3.pdf&title=EDA%20and%20Visualization">
+    Open Module →
+</a>
+
+                </div>
+
+
+                <div class="big-module-card green-card">
+
+                    <span>MODULE 03</span>
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    <h2>
+                        Exploratory Data Analysis & Visualization
+                    </h2>
+
+                    <p>
+                        Explore datasets, identify patterns,
+                        create charts and understand relationships.
+                    </p>
+
+                    <div class="topic-tags">
+                        <span>EDA</span>
+                        <span>Matplotlib</span>
+                        <span>Seaborn</span>
+                    </div>
+
+                    <a class="module-btn"
+   href="pdf-reader.html?file=pdfs/module3.pdf&title=EDA%20and%20Visualization">
+    Open Module →
+</a>
+
+                </div>
+
+
+                <div class="big-module-card orange-card">
+
+                    <span>MODULE 04</span>
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <h2>
+                        Statistics & Machine Learning
+                    </h2>
+
+                    <p>
+                        Statistics concepts, probability,
+                        regression, classification and
+                        machine learning fundamentals.
+                    </p>
+
+                    <div class="topic-tags">
+                        <span>Statistics</span>
+                        <span>ML</span>
+                        <span>Scikit-Learn</span>
+                    </div>
+
+                    <a class="module-btn"
+   href="pdfs/module4.pdf"
+   target="_blank">
+    Start Learning →
+</a>
+
+                </div>
+
+
+                <div class="big-module-card pink-card">
+
+                    <span>MODULE 05</span>
+
+                    <i class="fa-solid fa-rocket"></i>
+
+                    <h2>
+                        Advanced Data Science & Applications
+                    </h2>
+
+                    <p>
+                        Advanced analytics, AI applications,
+                        real-world projects and modern
+                        Data Science techniques.
+                    </p>
+
+                    <div class="topic-tags">
+                        <span>AI</span>
+                        <span>Advanced ML</span>
+                        <span>Projects</span>
+                    </div>
+
+                    <a class="module-btn"
+   href="pdf-reader.html?file=pdfs/module5.pdf&title=Advanced%20Data%20Science%20and%20Applications">
+    Open Module →
+</a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LABS ================= -->
+
+        <section id="labs" class="page-section">
+
+            <div class="page-title">
+
+                <span>💻 Practical Learning</span>
+
+                <h1>Lab Assignments</h1>
+
+                <p>
+                    Access your Data Science laboratory experiments
+                    and GitHub projects.
+                </p>
+
+            </div>
+
+
+            <div class="lab-grid">
+
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        EXP 01
+                    </div>
+
+                    <div class="lab-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        CSV Data Analysis
+                    </h3>
+
+                    <p>
+                        Read and analyze CSV datasets using Pandas.
+                    </p>
+
+                    
+<a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/Experiment-1-CSV"
+   target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-github"></i>
+    View Code →
+</a>
+
+
+                </div>
+
+
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        EXP 02
+                    </div>
+
+                    <div class="lab-icon">
+                        🗂️
+                    </div>
+
+                    <h3>
+                        JSON Data Handling
+                    </h3>
+
+                    <p>
+                        Read, process and analyze JSON data.
+                    </p>
+
+                    
+<a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/Experiment-2-JSON"
+   target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-github"></i>
+    View Code →
+</a>
+
+
+                </div>
+
+
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        EXP 03
+                    </div>
+
+                    <div class="lab-icon">
+                        📗
+                    </div>
+
+                    <h3>
+                        Excel Data Analysis
+                    </h3>
+
+                    <p>
+                        Work with Excel files and perform data analysis.
+                    </p>
+
+                    
+<a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/Experiment-3-Excel"
+   target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-github"></i>
+    View Code →
+</a>
+
+
+                </div>
+
+
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        EXP 04
+                    </div>
+
+                    <div class="lab-icon">
+                        🛢️
+                    </div>
+
+                    <h3>
+                        Database & SQL
+                    </h3>
+
+                    <p>
+                        Perform database operations using Python and SQL.
+                    </p>
+
+                    
+<a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/Experiment-4-Database"
+   target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-github"></i>
+    View Code →
+</a>
+
+
+                </div>
+
+
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        EXP 05
+                    </div>
+
+                    <div class="lab-icon">
+                        🔄
+                    </div>
+
+                    <h3>
+                        Data Wrangling
+                    </h3>
+
+                    <p>
+                        Perform merging, indexing and transformation
+                        operations.
+                    </p>
+
+                    
+<a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/Experiment-5-Data-Wrangling"
+   target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-github"></i>
+    View Code →
+</a>
+
+
+                </div>
+
+
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        PROJECT
+                    </div>
+
+                    <div class="lab-icon">
+                        🚀
+                    </div>
+
+                    <h3>
+                        Data Science Projects
+                    </h3>
+
+                    <p>
+                        Explore complete Data Science projects
+                        and implementations.
+                    </p>
+
+                    
+<div class="lab-card">
+    <div class="lab-number">04</div>
+    <div class="lab-icon">💻</div>
+    <h3>Experiment 4</h3>
+    <p>Explore Experiment 4 source code and files.</p>
+    <a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/4th"
+       target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github"></i>
+        View Code →
+    </a>
+</div>
+
+<div class="lab-card">
+    <div class="lab-number">5TH</div>
+    <div class="lab-icon">🚀</div>
+    <h3>5th Semester Experiments</h3>
+    <p>Open your fifth semester experiment files and source code.</p>
+    <a href="https://github.com/navaneethvaradi2006-cpu/dsprojects/tree/main/5th"
+       target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-github"></i>
+        View Code →
+    </a>
+</div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TOOLS ================= -->
+
+        <section id="tools" class="page-section">
+
+            <div class="page-title">
+
+                <span>🛠️ Developer Toolkit</span>
+
+                <h1>Data Science Tools</h1>
+
+                <p>
+                    Popular tools and technologies used in Data Science.
+                </p>
+
+            </div>
+
+
+            <div class="tools-grid">
+
+                
+<div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=Python'"
+     style="cursor: pointer;">
+
+    <div class="tool-icon">🐍</div>
+    <h3>Python</h3>
+    <p>Programming language for Data Science.</p>
+    <button type="button"
+            onclick="event.stopPropagation(); location.href='tool-lab.html?tool=Python'">
+        Open Code Editor →
+    </button>
+
+</div>
+
+
+                <div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=NumPy'"
+     style="cursor: pointer;">
+                    <strong class="tool-text">NP</strong>
+                    <h3>NumPy</h3>
+                    <p>Numerical computing and array operations.</p>
+                </div>
+
+                <div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=Pandas'"
+     style="cursor: pointer;">
+                    <strong class="tool-text">PD</strong>
+                    <h3>Pandas</h3>
+                    <p>Data manipulation and analysis.</p>
+                </div>
+
+                
+<div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=Matplotlib'"
+     style="cursor: pointer;">
+    <i class="fa-solid fa-chart-column"></i>
+    <h3>Matplotlib</h3>
+    <p>Data visualization and plotting.</p>
+</div>
+
+
+                <
+<div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=Seaborn'"
+     style="cursor: pointer;">
+    <i class="fa-solid fa-chart-area"></i>
+    <h3>Seaborn</h3>
+    <p>Statistical data visualization.</p>
+</div>
+
+
+                
+<div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=Scikit-Learn'"
+     style="cursor: pointer;">
+    <i class="fa-solid fa-brain"></i>
+    <h3>Scikit-Learn</h3>
+    <p>Machine Learning algorithms.</p>
+</div>
+
+
+                
+<div class="tool-card"
+     onclick="window.open('https://github.com/navaneethvaradi2006-cpu/dsprojects', '_blank')"
+     style="cursor: pointer;">
+    <i class="fa-brands fa-github"></i>
+    <h3>GitHub</h3>
+    <p>Code hosting and project management.</p>
+</div>
+
+
+                <
+<div class="tool-card"
+     onclick="location.href='tool-lab.html?tool=SQL'"
+     style="cursor: pointer;">
+    <i class="fa-solid fa-database"></i>
+    <h3>SQL</h3>
+    <p>Database querying and management.</p>
+</div>
+
+
+            </div>
+
+        </section>
+
+
+        
+<!-- ================= RESOURCES ================= -->
+
+<section id="resources" class="page-section">
+
+    <div class="page-title">
+        <span>📖 Study Materials</span>
+        <h1>Learning Resources</h1>
+        <p>Learn, practice and build your Data Science skills.</p>
+    </div>
+
+    <div class="resource-grid">
+
+        <!-- PDF NOTES -->
+
+        <div class="resource-card">
+            <div class="resource-icon">📘</div>
+            <h3>Python Notes</h3>
+            <p>Python basics, syntax, functions, lists and dictionaries.</p>
+            <a href="pdf/python_notes.pdf" target="_blank">Open PDF →</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">📊</div>
+            <h3>Data Science Notes</h3>
+            <p>Data analysis, cleaning, statistics and Data Science concepts.</p>
+            <a href="pdf/data_science_notes.pdf" target="_blank">Open PDF →</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">🤖</div>
+            <h3>Machine Learning Notes</h3>
+            <p>ML algorithms, training, testing and evaluation.</p>
+            <a href="pdf/machine_learning_notes.pdf" target="_blank">Open PDF →</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">📝</div>
+            <h3>Exam Preparation</h3>
+            <p>Revision notes, important concepts and practice questions.</p>
+            <a href="pdf/exam_preparation_notes.pdf" target="_blank">Open PDF →</a>
+        </div>
+
+        <!-- YOUTUBE TUTORIALS -->
+
+        <div class="resource-card">
+            <div class="resource-icon">🐍</div>
+            <h3>Python Programming</h3>
+            <p>Learn Python from basics to functions and practical programs.</p>
+            <a href="https://www.youtube.com/results?search_query=freeCodeCamp+Python+full+course+beginners" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">📈</div>
+            <h3>Data Science Fundamentals</h3>
+            <p>Learn NumPy, Pandas and the Data Science workflow.</p>
+            <a href="https://www.youtube.com/results?search_query=Python+Data+Science+full+course+NumPy+Pandas" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">📂</div>
+            <h3>CSV, JSON and Excel</h3>
+            <p>Practice reading and processing different file formats with Python.</p>
+            <a href="https://www.youtube.com/results?search_query=Python+Pandas+CSV+JSON+Excel+tutorial" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">🗄️</div>
+            <h3>Database Connectivity</h3>
+            <p>Learn SQL, SQLite and database operations using Python.</p>
+            <a href="https://www.youtube.com/results?search_query=Python+SQLite+database+connectivity+tutorial" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">🔄</div>
+            <h3>Data Wrangling</h3>
+            <p>Learn data cleaning, merging, reshaping and combining datasets.</p>
+            <a href="https://www.youtube.com/results?search_query=Pandas+data+wrangling+merge+stack+unstack+tutorial" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">📊</div>
+            <h3>EDA and Visualization</h3>
+            <p>Explore datasets and create charts using Matplotlib and Seaborn.</p>
+            <a href="https://www.youtube.com/results?search_query=Python+EDA+Matplotlib+Seaborn+beginner+tutorial" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">🧠</div>
+            <h3>Machine Learning Practical</h3>
+            <p>Learn ML concepts, algorithms and model evaluation.</p>
+            <a href="https://www.youtube.com/results?search_query=scikit-learn+machine+learning+beginner+tutorial" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">🎯</div>
+            <h3>Exam Revision</h3>
+            <p>Revise Python, Pandas and Data Science topics for examinations.</p>
+            <a href="https://www.youtube.com/results?search_query=Python+Pandas+Data+Science+exam+revision" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+        <div class="resource-card">
+            <div class="resource-icon">🐙</div>
+            <h3>Git and GitHub</h3>
+            <p>Learn to manage code, upload experiments and maintain projects.</p>
+            <a href="https://www.youtube.com/results?search_query=Git+GitHub+VS+Code+beginner+tutorial" target="_blank" rel="noopener noreferrer">Watch Tutorial ▶</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+        <!-- ================= AI ================= -->
+
+        <section id="ai" class="page-section">
+
+            <div class="ai-container">
+
+                <div class="ai-icon">
+                    🤖
+                </div>
+
+                <h1>
+                    Data Science AI Assistant
+                </h1>
+
+                <p>
+                    Your intelligent learning companion for
+                    Data Science questions, coding and concepts.
+                </p>
+
+
+                <div class="ai-chat">
+
+                    <div class="ai-message">
+                        <strong>🤖 AI Assistant</strong>
+
+                        <p>
+                            Hi Navaneeth! 👋
+                            Ask me anything about Data Science,
+                            Python, Statistics or Machine Learning.
+                        </p>
+                    </div>
+
+
+                    <div class="ai-input">
+
+                        <input
+                            type="text"
+                            id="aiQuestion"
+                            placeholder="Ask your Data Science question..."
+                        >
+
+                        <button onclick="askAI()">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <section id="profile" class="page-section">
+
+            <div class="page-title">
+
+                <span>👤 Student Account</span>
+
+                <h1>My Profile</h1>
+
+                <p>
+                    Student academic and personal information.
+                </p>
+
+            </div>
+
+
+            <div class="profile-layout">
+
+                <div class="profile-card">
+
+                    <img src="images/navaneeth.jpg" alt="Profile">
+
+                    <h2>
+                        Varadi Navaneeth
+                    </h2>
+
+                    <p>
+                        CSE - Data Science
+                    </p>
+
+                    <span class="student-badge">
+                        DS-3
+                    </span>
+
+                </div>
+
+
+                <div class="details-card">
+
+                    <h2>
+                        Student Details
+                    </h2>
+
+
+                    <div class="details-grid">
+
+                        <div class="detail-item">
+                            <span>Name</span>
+                            <strong>Varadi Navaneeth</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Register Number</span>
+                            <strong>24102A030133</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>College / University</span>
+                            <strong>Mohan Babu University</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Course</span>
+                            <strong>B.Tech</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Branch</span>
+                            <strong>CSE - DS</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Year</span>
+                            <strong>3rd Year</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Semester</span>
+                            <strong>V Semester</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Section</span>
+                            <strong>DS-3</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Academic Year</span>
+                            <strong>2026-27</strong>
+                        </div>
+
+                        <div class="detail-item">
+                            <span>Department</span>
+                            <strong>Data Science</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="faculty-box">
+
+                        <div class="faculty-icon">
+                            👨‍🏫
+                        </div>
+
+                        <div>
+                            <span>Faculty / Lecturer</span>
+                            <strong>BOSU BABU SIR</strong>
+                            <small>Subject: DATA SCIENCE</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <p>
+                © 2026 Data Science Digital Library
+            </p>
+
+            <span>
+                Mohan Babu University • Data Science Department
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

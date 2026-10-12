@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Module 1 | Data Science Digital Library</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="script.css">
+
+    <style>
+
+        .module-page {
+            padding: 35px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #6d28d9, #9333ea, #2563eb);
+            color: white;
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+        }
+
+        .module-header small {
+            font-weight: bold;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .module-header h1 {
+            font-size: 36px;
+            margin: 15px 0;
+        }
+
+        .module-header p {
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 850px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 11px 18px;
+            background: white;
+            color: #5b21b6;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            border: 1px solid #eee;
+        }
+
+        .topic-card i {
+            font-size: 25px;
+            color: #7c3aed;
+            margin-bottom: 12px;
+        }
+
+        .topic-card h3 {
+            color: #172554;
+            margin-bottom: 10px;
+        }
+
+        .topic-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .content-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .content-box h2 {
+            color: #172554;
+            margin-bottom: 15px;
+        }
+
+        .content-box h3 {
+            color: #6d28d9;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .content-box p {
+            color: #475569;
+            line-height: 1.8;
+        }
+
+        .content-box ul {
+            padding-left: 25px;
+            color: #475569;
+            line-height: 2;
+        }
+
+        .code-box {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 14px;
+            overflow-x: auto;
+            margin-top: 15px;
+            font-family: Consolas, monospace;
+            line-height: 1.7;
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .question {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 5px solid #7c3aed;
+        }
+
+        .progress-box {
+            background: linear-gradient(135deg, #ede9fe, #dbeafe);
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 25px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .progress-fill {
+            width: 20%;
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed, #2563eb);
+        }
+
+        @media (max-width: 800px) {
+
+            .module-page {
+                padding: 20px;
+            }
+
+            .topic-grid,
+            .practice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .module-header h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="module-page">
+
+    <a href="dashboard.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Dashboard
+    </a>
+
+
+    <!-- HEADER -->
+
+    <div class="module-header">
+
+        <small>MODULE 01 • DATA SCIENCE FOUNDATION</small>
+
+        <h1>
+            Introduction to Data Science & Python
+        </h1>
+
+        <p>
+            Learn the fundamentals of Data Science, Python programming,
+            variables, data types, operators, control statements,
+            functions and important Python data structures.
+        </p>
+
+    </div>
+
+
+    <!-- TOPICS -->
+
+    <div class="content-box">
+
+        <h2>
+            <i class="fa-solid fa-book"></i>
+            Module Topics
+        </h2>
+
+        <div class="topic-grid">
+
+            <div class="topic-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>1. Introduction to Data Science</h3>
+                <p>
+                    Understand Data Science, its importance,
+                    applications and the Data Science lifecycle.
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <i class="fa-brands fa-python"></i>
+                <h3>2. Python Basics</h3>
+                <p>
+                    Learn Python syntax, variables, data types,
+                    operators and basic programming concepts.
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>3. Control Statements</h3>
+                <p>
+                    Learn if, elif, else, for loops,
+                    while loops and control flow.
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <i class="fa-solid fa-gears"></i>
+                <h3>4. Functions</h3>
+                <p>
+                    Understand functions, parameters,
+                    return values and reusable code.
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <i class="fa-solid fa-list"></i>
+                <h3>5. Python Data Structures</h3>
+                <p>
+                    Learn Lists, Tuples, Sets and Dictionaries
+                    with practical examples.
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <i class="fa-solid fa-cubes"></i>
+                <h3>6. Python Libraries</h3>
+                <p>
+                    Introduction to NumPy, Pandas and other
+                    important Data Science libraries.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DATA SCIENCE -->
+
+    <div class="content-box">
+
+        <h2>What is Data Science?</h2>
+
+        <p>
+            Data Science is an interdisciplinary field that uses
+            statistics, mathematics, programming and machine learning
+            to extract useful information from data.
+        </p>
+
+        <h3>Why is Data Science Important?</h3>
+
+        <ul>
+            <li>Helps organizations make better decisions.</li>
+            <li>Finds useful patterns from large datasets.</li>
+            <li>Supports prediction and forecasting.</li>
+            <li>Helps businesses understand customers.</li>
+            <li>Used in Artificial Intelligence and Machine Learning.</li>
+        </ul>
+
+        <h3>Applications of Data Science</h3>
+
+        <ul>
+            <li>Healthcare</li>
+            <li>Banking and Finance</li>
+            <li>E-Commerce</li>
+            <li>Education</li>
+            <li>Social Media</li>
+            <li>Cyber Security</li>
+            <li>Transportation</li>
+        </ul>
+
+    </div>
+
+
+    <!-- PYTHON -->
+
+    <div class="content-box">
+
+        <h2>Python Programming</h2>
+
+        <p>
+            Python is a high-level, interpreted and general-purpose
+            programming language. It is widely used in Data Science
+            because of its simple syntax and powerful libraries.
+        </p>
+
+        <h3>Simple Python Program</h3>
+
+        <div class="code-box">
+<pre>
+name = "Navaneeth"
+age = 20
+
+print("Name:", name)
+print("Age:", age)
+</pre>
+        </div>
+
+    </div>
+
+
+    <!-- DATA TYPES -->
+
+    <div class="content-box">
+
+        <h2>Python Variables & Data Types</h2>
+
+        <p>
+            A variable is a name used to store a value in a program.
+            Python automatically determines the data type.
+        </p>
+
+        <ul>
+            <li>int → Integer values</li>
+            <li>float → Decimal values</li>
+            <li>str → Text</li>
+            <li>bool → True or False</li>
+            <li>list → Collection of values</li>
+            <li>tuple → Ordered immutable collection</li>
+            <li>set → Unordered unique values</li>
+            <li>dict → Key-value pairs</li>
+        </ul>
+
+        <div class="code-box">
+<pre>
+age = 20
+price = 99.5
+name = "Navaneeth"
+passed = True
+
+print(age)
+print(price)
+print(name)
+print(passed)
+</pre>
+        </div>
+
+    </div>
+
+
+    <!-- CONTROL STATEMENTS -->
+
+    <div class="content-box">
+
+        <h2>Control Statements</h2>
+
+        <h3>If-Else Statement</h3>
+
+        <div class="code-box">
+<pre>
+marks = 75
+
+if marks >= 40:
+    print("Pass")
+else:
+    print("Fail")
+</pre>
+        </div>
+
+        <h3>For Loop</h3>
+
+        <div class="code-box">
+<pre>
+for i in range(1, 6):
+    print(i)
+</pre>
+        </div>
+
+        <h3>While Loop</h3>
+
+        <div class="code-box">
+<pre>
+i = 1
+
+while i <= 5:
+    print(i)
+    i = i + 1
+</pre>
+        </div>
+
+    </div>
+
+
+    <!-- FUNCTIONS -->
+
+    <div class="content-box">
+
+        <h2>Python Functions</h2>
+
+        <p>
+            A function is a reusable block of code that performs
+            a particular task.
+        </p>
+
+        <div class="code-box">
+<pre>
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+
+print(result)
+</pre>
+        </div>
+
+    </div>
+
+
+    <!-- DATA STRUCTURES -->
+
+    <div class="content-box">
+
+        <h2>Python Data Structures</h2>
+
+        <h3>List</h3>
+
+        <div class="code-box">
+<pre>
+numbers = [10, 20, 30, 40]
+
+print(numbers)
+print(numbers[0])
+</pre>
+        </div>
+
+        <h3>Tuple</h3>
+
+        <div class="code-box">
+<pre>
+numbers = (10, 20, 30)
+
+print(numbers)
+</pre>
+        </div>
+
+        <h3>Set</h3>
+
+        <div class="code-box">
+<pre>
+numbers = {10, 20, 20, 30}
+
+print(numbers)
+</pre>
+        </div>
+
+        <h3>Dictionary</h3>
+
+        <div class="code-box">
+<pre>
+student = {
+    "name": "Navaneeth",
+    "branch": "CSE-DS"
+}
+
+print(student["name"])
+</pre>
+        </div>
+
+    </div>
+
+
+    <!-- LIBRARIES -->
+
+    <div class="content-box">
+
+        <h2>Important Python Libraries</h2>
+
+        <ul>
+            <li><b>NumPy</b> – Numerical computing and arrays.</li>
+            <li><b>Pandas</b> – Data analysis and data manipulation.</li>
+            <li><b>Matplotlib</b> – Data visualization.</li>
+            <li><b>Seaborn</b> – Statistical visualization.</li>
+            <li><b>Scikit-Learn</b> – Machine Learning.</li>
+        </ul>
+
+    </div>
+
+
+    <!-- PRACTICE -->
+
+    <div class="content-box">
+
+        <h2>
+            <i class="fa-solid fa-circle-question"></i>
+            Practice Questions
+        </h2>
+
+        <div class="practice-grid">
+
+            <div class="question">
+                1. What is Data Science?
+            </div>
+
+            <div class="question">
+                2. Why is Python used in Data Science?
+            </div>
+
+            <div class="question">
+                3. Explain Python data types.
+            </div>
+
+            <div class="question">
+                4. What is the difference between List and Tuple?
+            </div>
+
+            <div class="question">
+                5. Explain if-else statements.
+            </div>
+
+            <div class="question">
+                6. What is a function in Python?
+            </div>
+
+            <div class="question">
+                7. What is NumPy?
+            </div>
+
+            <div class="question">
+                8. What is Pandas used for?
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-box">
+
+        <h2>
+            <i class="fa-solid fa-chart-simple"></i>
+            Module Progress
+        </h2>
+
+        <p>
+            Module 1 • 20% completed
+        </p>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
