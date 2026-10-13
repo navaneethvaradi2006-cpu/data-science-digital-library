@@ -61,6 +61,9 @@ if (loginForm) {
 /* ================= DASHBOARD ================= */
 
 
+
+/* ================= DASHBOARD ================= */
+
 let sectionHistory = [];
 let currentSection = null;
 
@@ -69,6 +72,13 @@ function showSection(sectionId, clickedButton) {
     const selectedSection = document.getElementById(sectionId);
 
     if (!selectedSection) return;
+
+    if (currentSection === null) {
+        const activeSection = document.querySelector(".page-section.active-section");
+        if (activeSection) {
+            currentSection = activeSection.id;
+        }
+    }
 
     if (currentSection !== sectionId) {
         if (currentSection !== null) {
@@ -87,6 +97,12 @@ function showSection(sectionId, clickedButton) {
 
     navItems.forEach(function(item) {
         item.classList.remove("active");
+
+        const action = item.getAttribute("onclick") || "";
+        if (action.includes("'" + sectionId + "'") ||
+            action.includes('"' + sectionId + '"')) {
+            item.classList.add("active");
+        }
     });
 
     if (clickedButton) {
@@ -117,12 +133,12 @@ document.addEventListener("keydown", function(event) {
 
     if (sectionHistory.length > 0) {
         const previousSection = sectionHistory.pop();
+
         currentSection = null;
         showSection(previousSection);
-    } else {
-        window.history.back();
     }
 });
+
 
 
 function toggleSidebar() {
