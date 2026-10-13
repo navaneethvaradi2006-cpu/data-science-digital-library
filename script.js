@@ -60,61 +60,69 @@ if (loginForm) {
 
 /* ================= DASHBOARD ================= */
 
-function showSection(sectionId, clickedButton) {
 
-    const sections =
-        document.querySelectorAll(".page-section");
+let sectionHistory = [];
+let currentSection = null;
+
+function showSection(sectionId, clickedButton) {
+    const sections = document.querySelectorAll(".page-section");
+    const selectedSection = document.getElementById(sectionId);
+
+    if (!selectedSection) return;
+
+    if (currentSection !== sectionId) {
+        if (currentSection !== null) {
+            sectionHistory.push(currentSection);
+        }
+        currentSection = sectionId;
+    }
 
     sections.forEach(function(section) {
-
         section.classList.remove("active-section");
-
     });
 
+    selectedSection.classList.add("active-section");
 
-    const selectedSection =
-        document.getElementById(sectionId);
-
-    if (selectedSection) {
-
-        selectedSection.classList.add("active-section");
-
-    }
-
-
-    const navItems =
-        document.querySelectorAll(".nav-item");
+    const navItems = document.querySelectorAll(".nav-item");
 
     navItems.forEach(function(item) {
-
         item.classList.remove("active");
-
     });
 
-
     if (clickedButton) {
-
         clickedButton.classList.add("active");
-
     }
-
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
 
-
-    const sidebar =
-        document.getElementById("sidebar");
+    const sidebar = document.getElementById("sidebar");
 
     if (sidebar) {
-
         sidebar.classList.remove("open");
+    }
+}
 
+document.addEventListener("keydown", function(event) {
+    if (event.key !== "Escape") return;
+
+    const sidebar = document.getElementById("sidebar");
+
+    if (sidebar && sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        return;
     }
 
-}
+    if (sectionHistory.length > 0) {
+        const previousSection = sectionHistory.pop();
+        currentSection = null;
+        showSection(previousSection);
+    } else {
+        window.history.back();
+    }
+});
 
 
 function toggleSidebar() {
